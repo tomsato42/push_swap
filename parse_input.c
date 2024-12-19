@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 20:58:39 by tomsato           #+#    #+#             */
-/*   Updated: 2024/12/19 20:46:56 by tomsato          ###   ########.fr       */
+/*   Created: 2024/12/19 20:09:39 by tomsato           #+#    #+#             */
+/*   Updated: 2024/12/19 21:03:57 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char *argv)
+int	*parse_input(int argc, char *argv, int *input_values)
 {
-	int *input_values;
+	size_t	n;
 
-	if (!parse_input(argc, argv, input_values))
-		return (NULL);
-	return (NULL);
+	n = 0;
+	while (n < argc)
+	{
+		
+	}
 }
+
+/*
+
+*/
