@@ -6,7 +6,7 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:58:36 by tomsato           #+#    #+#             */
-/*   Updated: 2024/12/19 21:06:06 by tomsato          ###   ########.fr       */
+/*   Updated: 2024/12/20 15:21:04 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stddef.h>
 # include <stdlib.h>
+# include <unistd.h>
 
 /* エラー出力マクロ */
 # define PRINT_ERROR() (write(2, "Error\n", 6))
@@ -38,10 +39,13 @@ typedef struct s_ring_head
 /*リストのメモリアドレスを確保*/
 t_ring_head			*list_init(void);
 /*入力の文字列をint型に変換*/
-int					*parse_input(int argc, char *argv, int *input_values);
+int					*parse_input(int argc, char **argv);
 /*リストの末尾に要素を追加する。*/
 void				list_add_tail(t_ring_head *ring_head, int value);
 /*文字列を数字に変換*/
-int	ft_atoi(const char *nptr);
+int					ft_atoi(const char *nptr);
+/*文字列の長さを返す*/
+size_t	ft_strlen(const char *s);
+
 
 #endif

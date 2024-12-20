@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 20:58:39 by tomsato           #+#    #+#             */
-/*   Updated: 2024/12/20 15:21:54 by tomsato          ###   ########.fr       */
+/*   Created: 2024/10/23 13:58:37 by tomsato           #+#    #+#             */
+/*   Updated: 2024/12/20 15:20:45 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include <stddef.h>
 
-int	main(int argc, char *argv)
+size_t	ft_strlen(const char *s)
 {
-	int *input_values;
+	size_t	count;
 
-	input_values = parse_input(argc, argv);
-	if (!input_values)
-		return (NULL);
-	return (NULL);
+	count = 0;
+	while (*s++)
+		count++;
+	return (count);
 }
