@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
+/*   By: tomsato <tomsato@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:58:36 by tomsato           #+#    #+#             */
-/*   Updated: 2024/12/20 15:21:04 by tomsato          ###   ########.fr       */
+/*   Updated: 2024/12/21 18:29:27 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void				list_add_tail(t_ring_head *ring_head, int value);
 /*文字列を数字に変換*/
 int					ft_atoi(const char *nptr);
 /*文字列の長さを返す*/
-size_t	ft_strlen(const char *s);
-
+size_t				ft_strlen(const char *s);
+/*int型の配列をソートする*/
+int					merge_sort(size_t start, size_t end, int *arr);
 
 #endif
