@@ -6,7 +6,7 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 20:09:39 by tomsato           #+#    #+#             */
-/*   Updated: 2024/12/20 20:45:07 by tomsato          ###   ########.fr       */
+/*   Updated: 2024/12/22 16:37:15 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,12 +114,18 @@ int	*parse_input(int argc, char **argv)
 // {
 // 	int	i;
 // 	int	*input;
+// 	int *input2;
 
 // 	input = parse_input(argc, argv);
+// 	input2 = parse_input(argc, argv);
 // 	if (input == NULL)
 // 	{
 // 		return (0);
 // 	}
+// 	printf("arr is sorted :%d\n", arr_issorted(input, argc - 1));
+// 	merge_sort(0, argc - 1, input2);
+// 	printf("arr is duplicate : %d\n", arr_issorted(input2, argc - 1));
+	
 // 	printf("Number of arguments (argc): %d\n", argc);
 // 	printf("Arguments (argv):\n");
 // 	i = 0;
