@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomsato <tomsato@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:58:36 by tomsato           #+#    #+#             */
-/*   Updated: 2024/12/21 18:29:27 by tomsato          ###   ########.fr       */
+/*   Updated: 2024/12/22 20:55:41 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,19 @@ t_ring_head			*list_init(void);
 /*入力の文字列をint型に変換*/
 int					*parse_input(int argc, char **argv);
 /*リストの末尾に要素を追加する。*/
-void				list_add_tail(t_ring_head *ring_head, int value);
+void				list_add_tail(t_ring_head *list, int *arr, size_t arr_size);
 /*文字列を数字に変換*/
 int					ft_atoi(const char *nptr);
 /*文字列の長さを返す*/
 size_t				ft_strlen(const char *s);
 /*int型の配列をソートする*/
 int					merge_sort(size_t start, size_t end, int *arr);
+/*配列がソートされているかを調べる。*/
+int					arr_issorted(int *arr, size_t size);
+/*入力が有効かを調べ、有効ならint型の配列にして返す。*/
+int					*is_input_enabled(int argc, char **argv);
+
+int					arr_isdup(int *input_arr, size_t size);
+
 
 #endif
