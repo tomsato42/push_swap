@@ -6,7 +6,7 @@
 /*   By: tomsato <tomsato@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 20:09:39 by tomsato           #+#    #+#             */
-/*   Updated: 2024/12/21 18:59:41 by tomsato          ###   ########.fr       */
+/*   Updated: 2024/12/22 23:26:26 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,10 @@ int	*parse_input(int argc, char **argv)
 // {
 // 	int	i;
 // 	int	*input;
+// 	int *input2;
 
 // 	input = parse_input(argc, argv);
+// 	input2 = parse_input(argc, argv);
 // 	if (input == NULL)
 // 		return (0);
 // 	printf("isdup : %d\n", arr_isdup(input, argc - 1));
