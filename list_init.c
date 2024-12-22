@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
+/*   By: tomsato <tomsato@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 19:13:37 by tomsato           #+#    #+#             */
-/*   Updated: 2024/12/19 20:21:04 by tomsato          ###   ########.fr       */
+/*   Updated: 2024/12/21 18:55:06 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_ring_head	*list_init(void)
 	new_list = (t_ring_head *)malloc(sizeof(t_ring_head));
 	if (!new_list)
 	{
-		PRINT_ERROR();
+		write(2, "Error\n", 6);
 		return (NULL);
 	}
 	new_list->head = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
+/*   By: tomsato <tomsato@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 20:09:39 by tomsato           #+#    #+#             */
-/*   Updated: 2024/12/20 20:45:07 by tomsato          ###   ########.fr       */
+/*   Updated: 2024/12/21 18:59:41 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,27 @@ static int	check_boundary(char *s, int is_minus)
 {
 	int	n;
 
-	n = 0;
+	n = -1;
 	if (is_minus == 1)
-		while (n < 10)
+	{
+		while (++n < 10)
 		{
 			if (OVER_INT_MIN[n] < s[n])
 				return (1);
 			if (OVER_INT_MIN[n] > s[n])
 				return (0);
-			n++;
 		}
+	}
 	else
-		while (n < 10)
+	{
+		while (++n < 10)
 		{
 			if (OVER_INT_MAX[n] < s[n])
 				return (1);
 			if (OVER_INT_MAX[n] > s[n])
 				return (0);
-			n++;
 		}
+	}
 	return (0);
 }
 
@@ -93,14 +95,14 @@ int	*parse_input(int argc, char **argv)
 	input_values = (int *)malloc((argc - 1) * sizeof(int));
 	if (input_values == NULL)
 	{
-		PRINT_ERROR();
+		write(2, "Error\n", 6);
 		return (NULL);
 	}
 	while (i < argc - 1)
 	{
 		if (validate_input(argv[i + 1]) == 0)
 		{
-			PRINT_ERROR();
+			write(2, "Error\n", 6);
 			free(input_values);
 			return (NULL);
 		}
@@ -117,9 +119,8 @@ int	*parse_input(int argc, char **argv)
 
 // 	input = parse_input(argc, argv);
 // 	if (input == NULL)
-// 	{
 // 		return (0);
-// 	}
+// 	printf("isdup : %d\n", arr_isdup(input, argc - 1));
 // 	printf("Number of arguments (argc): %d\n", argc);
 // 	printf("Arguments (argv):\n");
 // 	i = 0;
