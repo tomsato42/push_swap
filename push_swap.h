@@ -6,7 +6,7 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:58:36 by tomsato           #+#    #+#             */
-/*   Updated: 2024/12/22 20:55:41 by tomsato          ###   ########.fr       */
+/*   Updated: 2024/12/22 21:07:47 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@
 /*双方向循環リスト(Doubly Circular List)*/
 typedef struct s_ring
 {
-	int				value;
 	struct s_ring	*next;
 	struct s_ring	*prev;
-
+	int				value;
 }					t_ring;
 
 /*双方向循環リストの先頭*/
