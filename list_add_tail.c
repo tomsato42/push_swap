@@ -6,7 +6,7 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:55:40 by tomsato           #+#    #+#             */
-/*   Updated: 2024/12/22 20:58:34 by tomsato          ###   ########.fr       */
+/*   Updated: 2024/12/30 19:55:32 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,25 +52,25 @@ void list_add_tail(t_ring_head *list, int *arr, size_t arr_size)
 	}
 }
 
-#include <stdio.h>
-int main()
-{
-	int i = 0;
-	int size = 5;
-	int arr[5] = {2, 3, 4, 5, 1};
-	t_ring_head *list = list_init();
-	list_add_tail(list,arr,size);
-	t_ring *ptr = list->head;
-	while (i < (list->size)*2)
-	{
-		printf("%d, ",ptr->value);	
-		ptr = ptr->next;
-		i++;
-	}
+// #include <stdio.h>
+// int main()
+// {
+// 	int i = 0;
+// 	int size = 5;
+// 	int arr[5] = {2, 3, 4, 5, 1};
+// 	t_ring_head *list = list_init();
+// 	list_add_tail(list,arr,size);
+// 	t_ring *ptr = list->head;
+// 	while (i < (list->size)*2)
+// 	{
+// 		printf("%d, ",ptr->value);	
+// 		ptr = ptr->next;
+// 		i++;
+// 	}
 
-	free(list);
-	return (0);
-}
+// 	free(list);
+// 	return (0);
+// }
 
 /*
              list->head
