@@ -6,7 +6,7 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:55:40 by tomsato           #+#    #+#             */
-/*   Updated: 2024/12/30 19:55:32 by tomsato          ###   ########.fr       */
+/*   Updated: 2024/12/30 20:37:37 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void list_add_tail(t_ring_head *list, int *arr, size_t arr_size)
 	while (i < arr_size)
 	{
 		list_new(list, arr[i]);
+		//ここで、malloc失敗してNULLが返ってきたときにリストの要素をすべてfreeする
 		i++;
 	}
 }
