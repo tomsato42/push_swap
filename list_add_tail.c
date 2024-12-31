@@ -6,13 +6,13 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:55:40 by tomsato           #+#    #+#             */
-/*   Updated: 2024/12/30 20:37:37 by tomsato          ###   ########.fr       */
+/*   Updated: 2024/12/31 16:14:57 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_ring	*list_new(t_ring_head *list, int value)
+static t_ring	*list_new(t_ring_head *list, int value)
 {
 	t_ring *new;
 	t_ring *tail;
@@ -47,31 +47,50 @@ void list_add_tail(t_ring_head *list, int *arr, size_t arr_size)
 	i = 0;
 	while (i < arr_size)
 	{
-		list_new(list, arr[i]);
-		//ここで、malloc失敗してNULLが返ってきたときにリストの要素をすべてfreeする
+		if(list_new(list, arr[i]) == NULL)
+		{
+			list_free(list);
+			write(2,"Error\n",6);
+		}
 		i++;
 	}
 }
 
-// #include <stdio.h>
-// int main()
-// {
-// 	int i = 0;
-// 	int size = 5;
-// 	int arr[5] = {2, 3, 4, 5, 1};
-// 	t_ring_head *list = list_init();
-// 	list_add_tail(list,arr,size);
-// 	t_ring *ptr = list->head;
-// 	while (i < (list->size)*2)
-// 	{
-// 		printf("%d, ",ptr->value);	
-// 		ptr = ptr->next;
-// 		i++;
-// 	}
-
-// 	free(list);
-// 	return (0);
-// }
+#include <stdio.h>
+int main(int argc, char **argv)
+{
+	int i = 0;
+	int *arr = is_input_enabled(argc, argv);
+	if(!arr)
+		return (1);
+	t_ring_head *list = list_init();
+	list_add_tail(list,arr,argc - 1);
+	t_ring_head *list2 = list_init();
+	list_add_tail(list2,arr,argc - 1);
+	free(arr);
+	if(!list)
+		return (1);
+	list_swap(list, list2, 's');
+	t_ring *ptr = list->head;
+	while (i < (list->size))
+	{
+		printf("%d, ",ptr->value);	
+		ptr = ptr->next;
+		i++;
+	}
+	printf("\n");
+	i = 0;
+	ptr = list2->head;
+	while (i < (list2->size))
+	{
+		printf("%d, ",ptr->value);	
+		ptr = ptr->next;
+		i++;
+	}
+	list_free(list);
+	list_free(list2);
+	return (0);
+}
 
 /*
              list->head
