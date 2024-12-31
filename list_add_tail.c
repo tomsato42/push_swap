@@ -6,7 +6,7 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:55:40 by tomsato           #+#    #+#             */
-/*   Updated: 2024/12/31 16:14:57 by tomsato          ###   ########.fr       */
+/*   Updated: 2024/12/31 17:07:57 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ int main(int argc, char **argv)
 	free(arr);
 	if(!list)
 		return (1);
-	list_swap(list, list2, 's');
+	// list_swap(list, list2, 's');
+	list_rotate(list,list2,1,'r');
 	t_ring *ptr = list->head;
 	while (i < (list->size))
 	{
