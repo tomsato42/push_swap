@@ -6,7 +6,7 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 16:26:36 by tomsato           #+#    #+#             */
-/*   Updated: 2024/12/31 17:05:49 by tomsato          ###   ########.fr       */
+/*   Updated: 2025/01/01 18:06:25 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ void	list_rotate(t_ring_head *a, t_ring_head *b, int is_rev, char mode)
 		return ;
 	if (mode == 'a' || mode == 'r')
 	{
-		if (is_rev)
+		if (is_rev && a->head != NULL)
 			a->head = a->head->prev;
-		else
+		else if(a->head != NULL)
 			a->head = a->head->next;
 	}
 	if (mode == 'b' || mode == 'r')
-	{
-		if (is_rev)
+	{		
+		if (is_rev && b->head != NULL)
 			b->head = b->head->prev;
-		else
+		else if(b->head != NULL)
 			b->head = b->head->next;
 	}
 	write(1, "r", 1);

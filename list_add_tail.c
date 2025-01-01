@@ -6,7 +6,7 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:55:40 by tomsato           #+#    #+#             */
-/*   Updated: 2025/01/01 17:42:22 by tomsato          ###   ########.fr       */
+/*   Updated: 2025/01/01 18:04:12 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int main(int argc, char **argv) {
 	//list_rotate(list,list2,1,'r');
 	for (int i = 0; i < 3; i++) {
 		list_push(list, list2, 'b');
+
 	}
 	print_list(list);
 	print_list(list2);
