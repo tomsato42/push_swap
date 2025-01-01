@@ -6,7 +6,7 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:58:36 by tomsato           #+#    #+#             */
-/*   Updated: 2024/12/31 16:46:24 by tomsato          ###   ########.fr       */
+/*   Updated: 2025/01/01 14:29:12 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,7 @@ void				list_swap(t_ring_head *a, t_ring_head *b, char mode);
 /*ra,b,s,rra,b,sを実行する*/
 void				list_rotate(t_ring_head *a, t_ring_head *b, int is_rev,
 						char mode);
+/*pa,pbを実行する。*/
+void				list_push(t_ring_head *a, t_ring_head *b, char mode);
 
 #endif

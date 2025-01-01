@@ -1,7 +1,8 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 NAME = push_swap
-SRCS = push_swap.c stack_functions.c
+SRCS = .c
+SRCS = $(wildcard *.c)
 
 OBJS = $(SRCS:.c=.o)
 
@@ -13,7 +14,7 @@ $(NAME): $(OBJS)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test
 
 all: $(NAME)
 
@@ -24,3 +25,7 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
+
+test: $(NAME)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	valgrind -q --leak-check=full ./$(NAME) 2 1 3 6 5 8
