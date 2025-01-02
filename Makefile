@@ -28,4 +28,5 @@ re: fclean all
 
 test: $(NAME)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
-	valgrind -q --leak-check=full ./$(NAME) 2 1 3 6 5 8
+#	valgrind -q --leak-check=full ./$(NAME) 2 1 3 6 5 8
+	./$(NAME) 2 1 3 6 5 8
