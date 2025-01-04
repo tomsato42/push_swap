@@ -6,7 +6,7 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:40:38 by tomsato           #+#    #+#             */
-/*   Updated: 2025/01/04 17:37:14 by tomsato          ###   ########.fr       */
+/*   Updated: 2025/01/04 17:59:23 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,29 @@ static t_best_move	find_best_move(t_ring_head *from, t_ring_head *dist)
 // {
 // }
 
-// static void	sort_small_list(t_ring_head *list)
-// {
-// }
+static void	sort_small_list(t_ring_head *list, char side)
+{
+	size_t	i;
+	int		flag;
+
+	i = 0;
+	flag = 0;
+	if (list->size == 2)
+		if (list->head->next->value < list->head->value)
+			list_swap(list, list, side);
+	if (list->size == 3)
+	{
+		while (i < 3)
+		{
+			if (list->head->value < list->head->next->value)
+				flag++;
+			list->head = list->head->next;
+			i++;
+		}
+		if (flag != 2)
+			list_swap(list, list, side);
+	}
+}
 
 // static void	move_head_to_min_value(t_ring_head *a)
 // {
@@ -185,6 +205,11 @@ int	main(int argc, char **argv)
 	{
 		list_push(list, list2, 'b');
 	}
+	print_list(list);
+	print_list(list2);
+	printf("\n");
+	printf("exec sort_small_list\n");
+	sort_small_list(list2,'b');
 	print_list(list);
 	print_list(list2);
 	printf("\n");
