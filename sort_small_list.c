@@ -1,42 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arr_isdup.c                                        :+:      :+:    :+:   */
+/*   sort_small_list.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/21 18:30:08 by tomsato           #+#    #+#             */
-/*   Updated: 2025/01/05 18:30:18 by tomsato          ###   ########.fr       */
+/*   Created: 2025/01/05 18:52:38 by tomsato           #+#    #+#             */
+/*   Updated: 2025/01/05 18:53:19 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	arr_isdup(int *arr, size_t size)
+void	sort_small_list(t_ring_head *list, char side)
 {
 	size_t	i;
-	int		*copy_arr;
+	int		flag;
 
-	copy_arr = (int *)malloc(size * sizeof(int));
-	if (!copy_arr)
-		return (1);
 	i = 0;
-	while (i < size)
+	flag = 0;
+	if (list->size == 2)
+		if (list->head->next->value < list->head->value)
+			list_swap(list, list, side);
+	if (list->size == 3)
 	{
-		copy_arr[i] = arr[i];
-		i++;
-	}
-	merge_sort(0, size - 1, copy_arr);
-	i = 0;
-	while (i < size - 1)
-	{
-		if (copy_arr[i] == copy_arr[i + 1])
+		while (i < 3)
 		{
-			free(copy_arr);
-			return (1);
+			if (list->head->value < list->head->next->value)
+				flag++;
+			list->head = list->head->next;
+			i++;
 		}
-		i++;
+		if (flag != 2 && side == 'a')
+			list_swap(list, list, side);
+		else if (flag != 1 && side == 'b')
+			list_swap(list, list, side);
 	}
-	free(copy_arr);
-	return (0);
 }

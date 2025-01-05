@@ -6,19 +6,16 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 17:00:14 by tomsato           #+#    #+#             */
-/*   Updated: 2025/01/05 10:22:10 by tomsato          ###   ########.fr       */
+/*   Updated: 2025/01/05 18:36:22 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	push(t_ring_head *from, t_ring_head *dist)
+static void	push(t_ring_head *from, t_ring_head *dist, t_ring *node)
 {
-	t_ring	*node;
-
 	if (from->head == NULL)
 		return ;
-	node = from->head;
 	from->head->next->prev = from->head->prev;
 	from->head->prev->next = from->head->next;
 	from->head = from->head->next;
@@ -36,7 +33,8 @@ static void	push(t_ring_head *from, t_ring_head *dist)
 		dist->head->prev = node;
 		dist->head = node;
 	}
-	from->size--, dist->size++;
+	from->size--;
+	dist->size++;
 	if (from->size == 0)
 		from->head = NULL;
 }
@@ -47,12 +45,12 @@ void	list_push(t_ring_head *a, t_ring_head *b, char mode)
 		return ;
 	if (mode == 'a')
 	{
-		push(b, a);
+		push(b, a, b->head);
 		write(1, "pa\n", 3);
 	}
 	else if (mode == 'b')
 	{
-		push(a, b);
+		push(a, b, a->head);
 		write(1, "pb\n", 3);
 	}
 }

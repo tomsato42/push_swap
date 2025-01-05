@@ -6,7 +6,7 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:58:36 by tomsato           #+#    #+#             */
-/*   Updated: 2025/01/04 19:46:42 by tomsato          ###   ########.fr       */
+/*   Updated: 2025/01/05 19:48:39 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+# define LONG_MAX 9223372036854775807
+
 /*双方向循環リスト(Doubly Circular List)*/
 typedef struct s_ring
 {
@@ -26,11 +28,21 @@ typedef struct s_ring
 }					t_ring;
 
 /*双方向循環リストの先頭*/
+
+
 typedef struct s_ring_head
 {
 	t_ring			*head;
 	size_t			size;
 }					t_ring_head;
+
+/*移動を評価するための構造体*/
+typedef struct s_best_move
+{
+	long			from;
+	long			dist;
+	long			score;
+}					t_best_move;
 
 /*リストのメモリアドレスを確保*/
 t_ring_head			*list_init(void);
@@ -60,5 +72,20 @@ void				list_rotate(t_ring_head *a, t_ring_head *b, int is_rev,
 /*pa,pbを実行する。*/
 void				list_push(t_ring_head *a, t_ring_head *b, char mode);
 /*リストをソートする*/
-void	greedy_sort(t_ring_head *a, t_ring_head *b);
+void				greedy_sort(t_ring_head *a, t_ring_head *b);
+/*移動を評価する*/
+t_best_move			calc_score(long i, long j, long from_size, long dist_size);
+/*一番適切な移動を見つける*/
+t_best_move			find_best_move(t_ring_head *from, t_ring_head *dist,
+						int is_rev);
+/*見つけた組み合わせをもとに配列を移動させる関数*/
+void				apply_best_move(t_ring_head *from, t_ring_head *dist,
+						t_best_move min, char f_side);
+/*3以下の大きさのリストをソートする*/
+void				sort_small_list(t_ring_head *list, char side);
+/*一番小さい数を適切に一番上に持ってくる*/
+void				move_head_to_min_value(t_ring_head *a);
+/*小さいリストを特別に処理する*/
+void				handle_small_list(t_ring_head *list_a, t_ring_head *list_b);
+
 #endif

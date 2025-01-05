@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_add_tail.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomsato <tomsato@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:55:40 by tomsato           #+#    #+#             */
-/*   Updated: 2025/01/02 16:07:57 by tomsato          ###   ########.fr       */
+/*   Updated: 2025/01/05 18:39:39 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static t_ring	*list_new(t_ring_head *list, int value)
 {
-	t_ring *new;
-	t_ring *tail;
+	t_ring	*new;
+	t_ring	*tail;
 
 	new = (t_ring *)malloc(sizeof(t_ring));
 	if (!new)
@@ -40,32 +40,30 @@ static t_ring	*list_new(t_ring_head *list, int value)
 	return (new);
 }
 
-void list_add_tail(t_ring_head *list, int *arr, size_t arr_size)
+void	list_add_tail(t_ring_head *list, int *arr, size_t arr_size)
 {
 	size_t	i;
 
 	i = 0;
 	while (i < arr_size)
 	{
-		if(list_new(list, arr[i]) == NULL)
+		if (list_new(list, arr[i]) == NULL)
 		{
 			list_free(list);
-			write(2,"Error\n",6);
+			write(2, "Error\n", 6);
 		}
 		i++;
 	}
 }
 
-
-
 /*
-             list->head
-                ▼
-        ┌───────┐     ┌───────┐     ┌───────┐
-       │   1          │<─▶│   2          │<─▶│      3       │
-      ├───┬───┤     ├───┬───┤     ├───┬───┤
-     │prev  │  next│─▶ │ prev │ next │─▶ │prev  │next  │
-    └───┴───┘     └───┴───┘     └───┴───┘
-       ▲                                                     │
-       └──────────────────────────┘
+				list->head
+				▼
+		┌───────┐     ┌───────┐     ┌───────┐
+		│   1          │<─▶│   2          │<─▶│      3       │
+		├───┬───┤     ├───┬───┤     ├───┬───┤
+		│prev  │  next│─▶ │ prev │ next │─▶ │prev  │next  │
+	└───┴───┘     └───┴───┘     └───┴───┘
+		▲                                                     │
+		└──────────────────────────┘
 */

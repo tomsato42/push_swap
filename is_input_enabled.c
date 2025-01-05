@@ -6,7 +6,7 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:58:17 by tomsato           #+#    #+#             */
-/*   Updated: 2024/12/30 20:20:21 by tomsato          ###   ########.fr       */
+/*   Updated: 2025/01/05 18:39:44 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 int	*is_input_enabled(int argc, char **argv)
 {
 	int	*input;
-	
+
 	if (argc < 2)
 		return (NULL);
 	input = parse_input(argc, argv);
 	if (input == NULL)
 		return (NULL);
-	else if(arr_isdup(input, argc - 1))
+	else if (arr_isdup(input, argc - 1))
 	{
 		write(2, "Error\n", 6);
 		free(input);

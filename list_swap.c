@@ -6,17 +6,15 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 15:23:01 by tomsato           #+#    #+#             */
-/*   Updated: 2025/01/01 18:07:46 by tomsato          ###   ########.fr       */
+/*   Updated: 2025/01/05 18:30:55 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-#include "push_swap.h"
-
 static void	swap(int *a, int *b)
 {
-	int tmp;
+	int	tmp;
 
 	tmp = *a;
 	*a = *b;
@@ -41,4 +39,3 @@ void	list_swap(t_ring_head *a, t_ring_head *b, char mode)
 	write(1, &mode, 1);
 	write(1, "\n", 1);
 }
-
