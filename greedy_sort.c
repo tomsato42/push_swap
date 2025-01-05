@@ -6,7 +6,7 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/01 18:40:38 by tomsato           #+#    #+#             */
-/*   Updated: 2025/01/04 20:21:15 by tomsato          ###   ########.fr       */
+/*   Updated: 2025/01/05 15:37:45 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,30 @@ static int	is_better_move(t_ring_head *from, t_ring_head *dist,
 	return (0);
 }
 
+static int	is_better_move_rev(t_ring_head *from, t_ring_head *dist,
+		t_best_move best, t_best_move score)
+{
+	const int	node_value = from->head->value;
+
+	if (dist->head == NULL || dist->head->prev == NULL
+		|| dist->head->next == NULL)
+		return (0);
+	if (score.score < best.score)
+	{
+		if (node_value < dist->head->prev->value)
+		{
+			if (dist->head->value < node_value)
+				return (1);
+			if (dist->head->prev->value < dist->head->value)
+				return (1);
+		}
+		if (dist->head->value < node_value
+			&& dist->head->prev->value < dist->head->value)
+			return (1);
+	}
+	return (0);
+}
+
 // static int is_better_move(t_ring_head *from, t_ring_head *dist, t_best_move best, t_best_move score)
 // {
 //     const int node_value = from->head->value;
@@ -122,7 +146,7 @@ static int	is_better_move(t_ring_head *from, t_ring_head *dist,
 
 #include <stdio.h>
 
-static t_best_move	find_best_move(t_ring_head *from, t_ring_head *dist)
+static t_best_move	find_best_move(t_ring_head *from, t_ring_head *dist, int is_rev)
 {
 	t_best_move	best;
 	t_best_move	score;
@@ -137,7 +161,9 @@ static t_best_move	find_best_move(t_ring_head *from, t_ring_head *dist)
 		while (j < (long)dist->size)
 		{
 			score = calc_score(i, j, (long)from->size, (long)dist->size);
-			if (is_better_move(from, dist, best, score))
+			if (is_better_move(from, dist, best, score) && (is_rev == 0))
+				best = score;
+			if (is_better_move_rev(from, dist, best, score) && (is_rev == 1))
 				best = score;
 			dist->head = dist->head->next;
 			j++;
@@ -191,7 +217,9 @@ static void	sort_small_list(t_ring_head *list, char side)
 			list->head = list->head->next;
 			i++;
 		}
-		if (flag != 2)
+		if (flag != 2 && side == 'a')
+			list_swap(list, list, side);
+		else if (flag != 1 && side == 'b')
 			list_swap(list, list, side);
 	}
 }
@@ -275,14 +303,49 @@ int	main(int argc, char **argv)
 	free(arr);
 	if (!list || !list2)
 		return (1);
+	if (list->size == 2)
+	{
+		list_swap(list,list2,'a'),list_free(list),list_free(list2);
+
+		return (0);
+	}
+	// print_list(list);
+	// printf("list->size is : %zu\n",list->size);
+	if (list->size == 3)
+	{
+		sort_small_list(list,'a');
+		move_head_to_min_value(list),list_free(list),list_free(list2);
+		return (0);
+	}
+	if (list ->size == 4)
+	{
+		for (int i = 0; i < 3; i++)
+			list_push(list, list2, 'b');
+		sort_small_list(list2,'b');
+		list_push(list,list2,'a');
+		while (list2->size != 0)
+			apply_best_move(list, list2, find_best_move(list2,list,0),'b');
+		move_head_to_min_value(list),list_free(list),list_free(list2);
+		return (0);
+	}
+	if (list ->size == 5)
+	{
+		list_push(list,list2,'b');
+		list_push(list,list2,'b');
+		sort_small_list(list,'a');
+		while (list2->size != 0)
+			apply_best_move(list, list2, find_best_move(list2,list,0),'b');
+		move_head_to_min_value(list),list_free(list),list_free(list2);
+		return (0);
+	}
 	for (int i = 0; i < 3; i++)
 		list_push(list, list2, 'b');
 	sort_small_list(list2,'b');
 	while (3 < list->size)
-		apply_best_move(list,list2,find_best_move(list,list2),'a');
+		apply_best_move(list,list2,find_best_move(list,list2,1),'a');
 	sort_small_list(list, 'a');
 	while (list2->size != 0)
-		apply_best_move(list, list2, find_best_move(list2,list),'b');
+		apply_best_move(list, list2, find_best_move(list2,list,0),'b');
 	move_head_to_min_value(list),list_free(list),list_free(list2);
 	return (0);
 }

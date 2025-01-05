@@ -6,7 +6,7 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 20:09:39 by tomsato           #+#    #+#             */
-/*   Updated: 2024/12/30 20:07:10 by tomsato          ###   ########.fr       */
+/*   Updated: 2025/01/05 15:31:50 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,11 @@ int	validate_input(char *s)
 		return (0);
 	}
 	if (*s == '+' || *s == '-')
+	{
 		s++;
+		if (!(*s))
+			return (0);
+	}
 	while (*s)
 	{
 		if (ft_isdigit(*s))

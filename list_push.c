@@ -6,7 +6,7 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 17:00:14 by tomsato           #+#    #+#             */
-/*   Updated: 2025/01/01 17:56:09 by tomsato          ###   ########.fr       */
+/*   Updated: 2025/01/05 10:22:10 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	push(t_ring_head *from, t_ring_head *dist)
 {
 	t_ring	*node;
-	
+
 	if (from->head == NULL)
 		return ;
 	node = from->head;
@@ -36,7 +36,7 @@ static void	push(t_ring_head *from, t_ring_head *dist)
 		dist->head->prev = node;
 		dist->head = node;
 	}
-	from->size--;dist->size++;
+	from->size--, dist->size++;
 	if (from->size == 0)
 		from->head = NULL;
 }
