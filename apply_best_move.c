@@ -6,7 +6,7 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 19:00:33 by tomsato           #+#    #+#             */
-/*   Updated: 2025/01/05 19:35:23 by tomsato          ###   ########.fr       */
+/*   Updated: 2025/01/05 20:32:31 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,8 @@ void	apply_best_move(t_ring_head *from, t_ring_head *dist,
 	}
 	rotate_from(from, &min, f_side);
 	rotate_dist(dist, &min, d_side);
-	list_push(from, dist, d_side);
+	if (f_side == 'a')
+		list_push(from, dist, d_side);
+	else
+		list_push(dist, from, d_side);
 }

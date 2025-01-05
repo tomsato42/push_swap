@@ -6,7 +6,7 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:58:36 by tomsato           #+#    #+#             */
-/*   Updated: 2025/01/05 19:48:39 by tomsato          ###   ########.fr       */
+/*   Updated: 2025/01/05 20:53:45 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct s_ring
 }					t_ring;
 
 /*双方向循環リストの先頭*/
-
 
 typedef struct s_ring_head
 {

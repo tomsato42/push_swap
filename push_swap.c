@@ -6,7 +6,7 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:58:39 by tomsato           #+#    #+#             */
-/*   Updated: 2025/01/05 19:44:48 by tomsato          ###   ########.fr       */
+/*   Updated: 2025/01/05 20:34:26 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ int	main(int argc, char **argv)
 	free(arr);
 	if (!list_a || !list_b)
 		return (1);
-	handle_small_list(list_a, list_b);
-	greedy_sort(list_a, list_b);
+	if (list_a->size < 6)
+		handle_small_list(list_a, list_b);
+	else
+		greedy_sort(list_a, list_b);
 	list_free(list_a);
 	list_free(list_b);
 	return (0);
