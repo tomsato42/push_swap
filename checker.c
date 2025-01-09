@@ -1,0 +1,205 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 11:42:22 by tomsato           #+#    #+#             */
+/*   Updated: 2025/01/09 15:06:54 by tomsato          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "checker.h"
+#include "push_swap.h"
+
+/*方針としては、雑にここに書きまくって最後にまとめる感じで*/
+
+/*
+readする関数を用意する。
+bufferを4ブロック確保して、
+一文字ずつ読んで、３文字読むか、改行見つけたら
+最後のブロックを改行にして、返す。
+そうしたら、だめなやつは次のチェック関数で弾かれるはず。
+*/
+
+/*いわゆるgetc(3)*/
+int	read_stdin_char(int fd)
+{
+	static char	buffer[100];
+	static char	*buffer_pointer;
+	static int	n;
+
+	if (n == 0)
+	{
+		n = read(fd, buffer, sizeof buffer);
+		buffer_pointer = buffer;
+	}
+	if (0 <= --n)
+		return ((unsigned char)*buffer_pointer++);
+	else
+		return (EOF);
+}
+
+char	*read_stdin(void)
+{
+	char	*buffer;
+	int		return_val;
+	size_t	i;
+
+	buffer = (char *)malloc(4 * sizeof(char));
+	if (!buffer)
+		return (NULL);
+	i = 0;
+	while (i < 4)
+	{
+		return_val = read_stdin_char(0);
+		if (return_val == EOF)
+		{
+			free(buffer);
+			return ("E");
+		}
+		buffer[i] = return_val;
+		if (return_val == '\n')
+			break ;
+		i++;
+	}
+	buffer[i] = '\0';
+	return (buffer);
+}
+
+void	apply_move(t_ring_head *list_a, t_ring_head *list_b, int id)
+{
+	if (id < 3)
+		list_swap(list_a, list_b, "abs"[id]);
+	else if (id < 5)
+		list_push(list_a, list_b, "ab"[id - 3]);
+	else
+		list_rotate(list_a, list_b, id > 7, "abr"[id % 3]);
+}
+
+int	validate_operations(t_ring_head *list_a, t_ring_head *list_b,
+		char *operations)
+{
+	int			i;
+	const char	*ops[] = {"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra",
+			"rrb", "rrr"};
+
+	i = 0;
+	while (i < 11)
+	{
+		if (!ft_strncmp(operations, ops[i], ft_strlen(ops[i]) + 1))
+		{
+			apply_move(list_a, list_b, i);
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
+int	list_issorted(t_ring_head *list_a, t_ring_head *list_b)
+{
+	size_t	i;
+	int		max;
+
+	if (list_b->head != NULL)
+		return (0);
+	i = 1;
+	max = list_a->head->value;
+	list_a->head = list_a->head->next;
+	while (i < list_a->size)
+	{
+		if (list_a->head->value < max)
+			return (0);
+		list_a->head = list_a->head->next;
+	}
+	return (1);
+}
+
+int	checker(t_ring_head *list_a, t_ring_head *list_b)
+{
+	char	*buffer;
+
+	while (1)
+	{
+		buffer = read_stdin();
+		if (buffer == NULL)
+		{
+			write(2, "Error\n", 7);
+			return (1);
+		}
+		if (*buffer == 'E')
+			break ;
+		if (validate_operations(list_a, list_b, buffer))
+		{
+			write(2, "Error\n", 7);
+			free(buffer);
+			return (1);
+		}
+		free(buffer);
+	}
+	if (list_issorted(list_a, list_b))
+		write(1,"OK\n",3);
+	else
+		write(1, "KO\n", 3);
+	return (0);
+}
+
+int	main(int argc, char **argv)
+{
+	int			*arr;
+	t_ring_head	*list_a;
+	t_ring_head	*list_b;
+
+	arr = is_input_enabled(argc, argv);
+	if (!arr)
+		return (1);
+	list_a = list_init();
+	list_add_tail(list_a, arr, argc - 1);
+	list_b = list_init();
+	free(arr);
+	if (!list_a || !list_b)
+		return (1);
+	/*
+	ここで、標準入力をreadして、入力された手順でうまく行くかを検証する関数を呼ぶ。
+	引数はリストかも、エラーが起きたら、リストをフリーしてreturn(1)
+	→て思ったけど、強制終了とかなくていい可能性ある。通して適当に出力させたら終わりでいいかも。
+	*/
+	checker(list_a, list_b);
+	list_free(list_a);
+	list_free(list_b);
+	return (0);
+}
+
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <unistd.h>
+
+// // read_stdinテスト用のmain関数
+// int main()
+// {
+//     char *result;
+
+//     printf("Enter input (up to 4 characters per line, or EOF to end):\n");
+//     while (1)
+//     {
+//         result = read_stdin();
+//         if (result == NULL)
+//         {
+//             printf("Memory allocation failed.\n");
+//             return (1);
+//         }
+//         else if (*result == 'E')
+//         {
+//             printf("EOF encountered.\n");
+//             break ;
+//         }
+//         else
+//         {
+//             printf("Read: %s\n", result);
+//             free(result);
+//         }
+//     }
+//     return (0);
+// }

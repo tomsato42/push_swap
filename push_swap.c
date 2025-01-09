@@ -6,12 +6,11 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 20:58:39 by tomsato           #+#    #+#             */
-/*   Updated: 2025/01/05 20:34:26 by tomsato          ###   ########.fr       */
+/*   Updated: 2025/01/09 12:09:30 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 int	main(int argc, char **argv)
 {
