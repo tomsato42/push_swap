@@ -6,7 +6,7 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 20:09:39 by tomsato           #+#    #+#             */
-/*   Updated: 2025/01/05 15:31:50 by tomsato          ###   ########.fr       */
+/*   Updated: 2025/01/11 17:04:06 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,10 @@ static int	check_overflow(char *s)
 
 int	validate_input(char *s)
 {
+	if (!*s)
+	{
+		return (0);
+	}
 	if (check_overflow(s) == 1)
 	{
 		return (0);
