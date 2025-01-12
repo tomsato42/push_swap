@@ -6,7 +6,7 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 11:42:22 by tomsato           #+#    #+#             */
-/*   Updated: 2025/01/12 14:54:28 by tomsato          ###   ########.fr       */
+/*   Updated: 2025/01/12 17:13:46 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,24 +39,28 @@ static void	apply_move(t_ring_head *list_a, t_ring_head *list_b, int id,
 static int	validate_operations(t_ring_head *list_a, t_ring_head *list_b,
 		char *operations)
 {
-	int			i;
-	const char	*ops[] = {"sa", "sb", "ss", "pa", "pb", "ra", "rb", "rr", "rra",
-		"rrb", "rrr"};
-
-	i = 0;
-	while (i < 11)
-	{
-		if (!ft_strncmp(operations, ops[i], ft_strlen(ops[i]) + 1))
-		{
-			apply_move(list_a, list_b, i, operations);
-			return (0);
-		}
-		i++;
-	}
 	if (!ft_strncmp(operations, "sa", ft_strlen("sa") + 1))
 		apply_move(list_a, list_b, 0, operations);
 	else if (!ft_strncmp(operations, "sb", ft_strlen("sb") + 1))
 		apply_move(list_a, list_b, 1, operations);
+	else if (!ft_strncmp(operations, "ss", ft_strlen("ss") + 1))
+		apply_move(list_a, list_b, 2, operations);
+	else if (!ft_strncmp(operations, "pa", ft_strlen("pa") + 1))
+		apply_move(list_a, list_b, 3, operations);
+	else if (!ft_strncmp(operations, "pb", ft_strlen("pb") + 1))
+		apply_move(list_a, list_b, 4, operations);
+	else if (!ft_strncmp(operations, "ra", ft_strlen("ra") + 1))
+		apply_move(list_a, list_b, 5, operations);
+	else if (!ft_strncmp(operations, "rb", ft_strlen("rb") + 1))
+		apply_move(list_a, list_b, 6, operations);
+	else if (!ft_strncmp(operations, "rr", ft_strlen("rr") + 1))
+		apply_move(list_a, list_b, 7, operations);
+	else if (!ft_strncmp(operations, "rra", ft_strlen("rra") + 1))
+		apply_move(list_a, list_b, 8, operations);
+	else if (!ft_strncmp(operations, "rrb", ft_strlen("rrb") + 1))
+		apply_move(list_a, list_b, 9, operations);
+	else if (!ft_strncmp(operations, "rrr", ft_strlen("rrr") + 1))
+		apply_move(list_a, list_b, 11, operations);
 	else
 		return (1);
 	return (0);
