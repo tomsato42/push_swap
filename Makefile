@@ -17,7 +17,7 @@ CHECKER_SRCS = apply_best_move.c arr_isdup.c arr_issorted.c calc_score.c \
 	list_init.c list_push.c list_rotate.c list_swap.c \
 	merge_sort.c move_head_to_min_value.c parse_input.c sort_small_list.c \
 	ft_strncmp.c list_swap_c.c list_rotate_c.c list_push_c.c \
-	is_input_enabled_c.c read_stdin.c checker.c
+	is_input_enabled_c.c read_stdin.c list_free_and_exit.c checker.c
 CHECKER_OBJS = $(CHECKER_SRCS:.c=.o)
 
 RM = rm -f

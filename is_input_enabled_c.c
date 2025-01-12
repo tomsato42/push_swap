@@ -6,7 +6,7 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/22 15:58:17 by tomsato           #+#    #+#             */
-/*   Updated: 2025/01/11 15:23:52 by tomsato          ###   ########.fr       */
+/*   Updated: 2025/01/12 14:44:33 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	*is_input_enabled_check(int argc, char **argv)
 {
-	int	*input;
+	int		*input;
+	char	buf[1];
 
 	if (argc < 2)
 		return (NULL);
@@ -29,9 +30,13 @@ int	*is_input_enabled_check(int argc, char **argv)
 	}
 	else if (arr_issorted(input, argc - 1))
 	{
-		free(input);
-		input = NULL;
-		write(1, "OK\n", 3);
+		if (read(0, buf, 1))
+		{
+			free(input);
+			input = NULL;
+			write(1, "KO\n", 3);
+			exit(1);
+		}
 	}
 	return (input);
 }

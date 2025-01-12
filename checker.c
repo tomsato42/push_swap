@@ -6,24 +6,37 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 11:42:22 by tomsato           #+#    #+#             */
-/*   Updated: 2025/01/11 18:28:17 by tomsato          ###   ########.fr       */
+/*   Updated: 2025/01/12 14:54:28 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 #include "push_swap.h"
 
-void	apply_move(t_ring_head *list_a, t_ring_head *list_b, int id)
+static void	apply_move(t_ring_head *list_a, t_ring_head *list_b, int id,
+		char *operations)
 {
 	if (id < 3)
-		list_swap_check(list_a, list_b, "abs"[id]);
+	{
+		if (list_swap_check(list_a, list_b, "abs"[id]))
+		{
+			list_free_and_exit(list_a, list_b, operations);
+		}
+	}
 	else if (id < 5)
-		list_push_check(list_a, list_b, "ab"[id - 3]);
-	else
-		list_rotate_check(list_a, list_b, id > 7, "abr"[(id - 5) % 3]);
+	{
+		if (list_push_check(list_a, list_b, "ab"[id - 3]))
+		{
+			list_free_and_exit(list_a, list_b, operations);
+		}
+	}
+	else if (list_rotate_check(list_a, list_b, id > 7, "abr"[(id - 5) % 3]))
+	{
+		list_free_and_exit(list_a, list_b, operations);
+	}
 }
 
-int	validate_operations(t_ring_head *list_a, t_ring_head *list_b,
+static int	validate_operations(t_ring_head *list_a, t_ring_head *list_b,
 		char *operations)
 {
 	int			i;
@@ -35,15 +48,21 @@ int	validate_operations(t_ring_head *list_a, t_ring_head *list_b,
 	{
 		if (!ft_strncmp(operations, ops[i], ft_strlen(ops[i]) + 1))
 		{
-			apply_move(list_a, list_b, i);
+			apply_move(list_a, list_b, i, operations);
 			return (0);
 		}
 		i++;
 	}
-	return (1);
+	if (!ft_strncmp(operations, "sa", ft_strlen("sa") + 1))
+		apply_move(list_a, list_b, 0, operations);
+	else if (!ft_strncmp(operations, "sb", ft_strlen("sb") + 1))
+		apply_move(list_a, list_b, 1, operations);
+	else
+		return (1);
+	return (0);
 }
 
-int	list_issorted(t_ring_head *list_a, t_ring_head *list_b)
+static int	list_issorted(t_ring_head *list_a, t_ring_head *list_b)
 {
 	size_t	i;
 	int		max;

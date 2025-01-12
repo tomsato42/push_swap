@@ -6,7 +6,7 @@
 /*   By: tomsato <tomsato@student.42.jp>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 17:00:14 by tomsato           #+#    #+#             */
-/*   Updated: 2025/01/11 15:05:49 by tomsato          ###   ########.fr       */
+/*   Updated: 2025/01/12 13:11:33 by tomsato          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,21 @@ static void	push(t_ring_head *from, t_ring_head *dist, t_ring *node)
 		from->head = NULL;
 }
 
-void	list_push_check(t_ring_head *a, t_ring_head *b, char mode)
+int	list_push_check(t_ring_head *a, t_ring_head *b, char mode)
 {
 	if (mode != 'a' && mode != 'b')
-		return ;
+		return (1);
 	if (mode == 'a')
 	{
+		if (b->head == NULL)
+			return (1);
 		push(b, a, b->head);
 	}
 	else if (mode == 'b')
 	{
+		if (a->head == NULL)
+			return (1);
 		push(a, b, a->head);
 	}
+	return (0);
 }

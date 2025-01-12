@@ -88,6 +88,27 @@ test_error_stdin()
         echo 'Expected "" but you are not'
     fi
 }
+
+test_error_stdin_sorted()
+{
+	expected_err=$(echo "$1" | ./checker_linux 3 2 1 2>&1 1>/dev/null )
+    err=$(echo "$1" | $valg ./checker 1 2 3 2>&1 1>/dev/null )
+    if [[ "$err" == "$expected_err" ]]; then
+        echo -n '.'
+    else
+        echo 'F'
+        echo 'Expected "Error" but you are not'
+		echo "input : $1, err : $err"
+    fi
+	expected_out=$(echo "$1" | ./checker_linux 3 2 1 2>/dev/null)
+	out=$(echo "$1" | $valg ./checker 3 2 1 2>/dev/null)
+    if [[ "$out" == "$expected_out" ]]; then
+        echo -n '.'
+    else
+        echo 'F'
+        echo 'Expected "" but you are not'
+    fi
+}
 make push_swap
 make checker
 
@@ -118,5 +139,7 @@ test_error '98419084239082349082349082349084390834290984398034982349804239084239
 test_error_stdin "adwadwa\ndwdaw\ndwadwada\n"
 test_error_stdin "pa\npb\nppap"
 test_error_stdin "pa\npb\np"
+test_error_stdin "pb\npb\npb\nsa\n"
 
+test_error_stdin_sorted "sa"
 echo ""
